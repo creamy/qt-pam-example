@@ -1,0 +1,34 @@
+Sample Qt application
+use pam to authenticate root.
+
+(c) 2012 Waitman Gobble <waitman@waitman.net>
+See License in source.
+
+this allows you setuid your Qt app to allow a non-root user to run it as root,
+but require the user to authenticate as root to run. In order to authenticate 
+root using pam, the app must be setuid root 
+
+(for example see "su")
+
+$ ls -l /usr/bin/su
+ -r-sr-xr-x  1 root  wheel  17304 Jun 10 17:10 /usr/bin/su
+
+
+ 1) chmod 4755 app_name
+ 2) chown root:wheel app_name
+ 
+This example has two buttons, 'Authenticate', and 'Touch Test'. If the user
+authenticates as root, the 'Touch Test' button will touch a file in /root.
+
+Built on FreeBSD 10.0-CURRENT but should work on other versions of FreeBSD,
+and may or may not work on other systems which use pam.
+
+Ref:
+
+/usr/include/security/pam.h
+http://www.freebsd.org/doc/handbook/permissions.html
+http://www.freebsd.org/doc/en_US.ISO8859-1/articles/pam/pam-sample-conv.html
+
+
+
+
